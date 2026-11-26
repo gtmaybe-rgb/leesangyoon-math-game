@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>이상윤 기사의 90일 수학 왕국 모험 (5학년 적응형)</title>
+<style>
+:root{--blue:#2867a9;--navy:#17395f;--gold:#f2c34e;--ink:#243247;--muted:#66758a;--line:#dce5ef;--bg:#f3f7fc;--green:#25815b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#eaf4ff,#f6f8fb 42%,#f8f3e8);font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif;color:var(--ink)}
+main{max-width:980px;margin:auto;padding:16px 13px 36px}.hero{background:linear-gradient(130deg,#17395f,#367bb7);color:#fff;border-radius:22px;padding:20px;box-shadow:0 10px 25px #193b6822}.heroTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.hero h1{font-size:clamp(23px,5vw,34px);margin:5px 0}.hero p{margin:4px 0;opacity:.9}.heroArt{font-size:58px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:15px}.stat{background:#ffffff20;border-radius:12px;padding:9px;text-align:center}.stat b{display:block;font-size:20px}.stat small{font-size:12px}
+.tabs{display:flex;gap:7px;overflow:auto;margin:14px 0 0;padding-bottom:3px}.tab{white-space:nowrap;border:1px solid var(--line);background:#fff;padding:10px 13px;border-radius:12px;color:var(--ink);font-weight:700}.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.panel{display:none}.panel.active{display:block}.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:16px;margin-top:13px;box-shadow:0 4px 14px #24324708}.card h2{font-size:19px;margin:0 0 12px}.muted{color:var(--muted);font-size:13px;line-height:1.55}.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.bar{height:10px;background:#e8edf4;border-radius:20px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,#37a87b,#8bc96d);border-radius:20px;transition:width .25s}
+button,input,select{font:inherit}button{cursor:pointer}.primary{background:var(--blue);color:white;border:0;border-radius:11px;padding:11px 15px;font-weight:750}.secondary{background:#f1f4f8;border:1px solid var(--line);border-radius:11px;padding:10px 13px;color:var(--ink)}button:disabled{opacity:.45;cursor:not-allowed}.full{width:100%;margin-top:9px}.world{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px;text-align:left;color:var(--ink)}.world.selected{border:2px solid var(--blue);background:#f2f7ff}.world:disabled{opacity:.42}.world strong{display:block}.world .emoji{font-size:27px;float:left;margin-right:8px}
+.stg{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;margin-top:7px}
+.quest{background:#f1f6fc;border-radius:15px;padding:16px;text-align:center}.big{font-size:clamp(30px,7vw,46px);font-weight:850;margin:14px 0;overflow-wrap:anywhere;line-height:1.5}.ask{font-size:15px;font-weight:600;color:var(--muted);margin-top:4px}.answer{width:100%;padding:13px;border:2px solid #cbd8e7;border-radius:11px;font-size:22px;text-align:center}.answer:focus{outline:3px solid #b7d8ff;border-color:var(--blue)}.feedback{padding:11px;border-radius:11px;margin-top:10px;font-weight:700;line-height:1.55;text-align:left}.good{background:#e7f6ed;color:#176a48}.try{background:#fff4df;color:#795317}.hint{background:#eaf4ff;border-radius:10px;padding:11px;margin-top:9px;font-size:14px}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.choice{padding:12px;border:1px solid var(--line);background:#fff;border-radius:10px;font-weight:700;font-size:20px}.hide{display:none!important}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.15;margin:0 3px;font-size:.82em}.fr i{font-style:normal;padding:0 4px}.fr i:first-child{border-bottom:.09em solid currentColor}.mx{display:inline-flex;align-items:center;gap:2px}
+.pill{display:inline-block;background:#fff4d7;border:1px solid #f0d58a;padding:5px 9px;border-radius:30px;font-size:12px;margin:2px}.item{border:1px solid var(--line);border-radius:13px;padding:12px;text-align:center;background:#fff}.item .icon{font-size:32px}.item.equipped{border:2px solid var(--gold);background:#fffaf0}.item button{margin-top:7px}.field{display:grid;gap:5px;margin:9px 0}.field input,.field select{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:white}.notice{background:#fff7e6;border:1px solid #f0dfb5;padding:11px;border-radius:11px;font-size:13px;line-height:1.5}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:left}th{background:#f5f8fb}.scroll{overflow-x:auto}.cert{background:linear-gradient(135deg,#fff9e8,#f0f7ff);border:7px double #d4ae50;border-radius:14px;padding:25px;text-align:center}.cert h2{font-size:27px;color:#7d5a18}.cert .seal{font-size:48px}
+@media(max-width:550px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.heroArt{font-size:48px}}
+@media print{body{background:#fff}.hero,.tabs,.noPrint,.card:not(#certificateCard){display:none!important}main{padding:0}.panel{display:none!important}#certificate.panel{display:block!important}#certificateCard{display:block!important;box-shadow:none;border:0}}
+</style></head><body><main>
+<header class="hero">
+ <div class="heroTop"><div><div style="font-size:12px;letter-spacing:2px;font-weight:800">90 DAYS · MATH ADVENTURE · GRADE 5</div><h1>⚔️ 이상윤 기사의<br>90일 수학 왕국 모험</h1><p>오늘의 한 걸음이 수학 자신감이 됩니다!</p></div><div class="heroArt" id="heroKnight">🛡️</div></div>
+ <div class="stats"><div class="stat">⭐ <b id="stars">0</b><small>별</small></div><div class="stat">🪙 <b id="coins">0</b><small>코인</small></div><div class="stat">🔥 <b id="streak">0일</b><small>연속 학습</small></div><div class="stat">📅 <b id="dayNo">1일차</b><small>90일 여정</small></div></div>
+</header>
+<nav class="tabs noPrint">
+ <button class="tab active" data-tab="adventure">🗺️ 모험</button><button class="tab" data-tab="hero">🧑‍🚀 기사 꾸미기</button><button class="tab" data-tab="treasure">🎁 보물창고</button><button class="tab" data-tab="report">📊 학습 기록</button><button class="tab" data-tab="certificate">🏅 인증서</button>
+</nav>
+<section class="panel active" id="adventure">
+ <div class="card"><div class="row"><h2>📜 오늘의 모험 이야기</h2><span class="pill" id="dayPill">90일 여정</span></div>
+ <div class="quest"><div style="font-size:42px">🏰</div><b id="storyTitle">현재 단계</b><p class="muted" id="storyText"></p><div class="bar"><span id="lvBar" style="width:0%"></span></div></div>
+ <div class="notice" id="dueBox" style="margin-top:12px"></div>
+ <div class="row" style="margin-top:12px"><div style="flex:1"><b>오늘의 성장</b><div class="bar" style="margin-top:7px"><span id="dailyBar" style="width:0%"></span></div><small class="muted" id="dailyText">오늘 0문제 해결 · 권장 목표 12문제</small></div><span style="font-size:30px">🌟</span></div>
+ <button class="primary full" id="startDaily">오늘의 모험 시작하기 🚀</button><button class="secondary full" id="startReview">🧠 어려웠던 단계 다시 풀기 (오늘 <span id="reviewCount">0</span>단계)</button>
+ </div>
+ <div class="card"><h2>🗺️ 수학 왕국 지도</h2><div class="muted">정답률이 80% 이상이 되면 다음 단계가 자동으로 열려요. 열린 단계는 언제든 자유롭게 연습할 수 있어요.</div><div class="grid" id="worlds" style="margin-top:12px"></div><div id="stages"></div></div>
+ <div class="card"><h2>🎯 나의 90일 도전</h2><div class="row"><b id="journeyCount">0 / 90일 학습</b><span class="muted" id="journeyPercent">0%</span></div><div class="bar" style="margin:9px 0"><span id="journeyBar" style="width:0%"></span></div><div class="muted">하루를 놓쳐도 괜찮아요. 다시 시작하는 것이 가장 중요합니다.</div></div>
+</section>
+<section class="panel" id="hero">
+ <div class="card"><h2>🧑‍🚀 이상윤 기사 꾸미기</h2><div class="quest"><div id="avatarPreview" style="font-size:72px">🛡️</div><b id="avatarTitle">수습 기사</b><p class="muted">학습으로 얻은 코인으로 장비를 모으고 기사 모습을 꾸며 보세요.</p></div>
+ <h2 style="margin-top:16px">기사의 장비</h2><div class="grid" id="equipment"></div>
+ <div class="notice" style="margin-top:12px">장비는 꾸미기 보상입니다. 장비가 없어도 문제 풀이와 다음 단계 진행에 불이익은 없습니다.</div></div>
+</section>
+<section class="panel" id="treasure">
+ <div class="card"><h2>🎁 보물창고</h2><div class="quest"><div style="font-size:50px">🧰</div><b>도전하면 보물이 쌓여요!</b><p class="muted">문제를 풀면 코인을 받고, 일정한 학습 목표를 달성하면 보물상자를 열 수 있어요.</p><button class="primary" id="openChest">보물상자 열기 · 20 코인</button><p class="muted" id="chestMessage">상자에는 새로운 장비 또는 응원 아이템이 들어 있어요.</p></div>
+ <h2 style="margin-top:16px">모은 보물</h2><div class="badges" id="collection"></div></div>
+</section>
+<section class="panel" id="report">
+ <div class="card"><h2>📊 교사용 학습 결과표</h2><p class="muted">이 기기에서 저장된 학습 기록을 확인하고 내려받을 수 있습니다. 정답률은 모두 "첫 시도" 기준입니다.</p><div class="grid"><div class="item">총 학습 문제<strong id="rSolved" style="display:block;font-size:25px">0</strong></div><div class="item">첫 시도 정답<strong id="rCorrect" style="display:block;font-size:25px">0</strong></div><div class="item">학습한 날짜<strong id="rDays" style="display:block;font-size:25px">0</strong></div><div class="item">복습 대기 단계<strong id="rReview" style="display:block;font-size:25px">0</strong></div></div>
+ <h2 style="margin-top:18px">영역별 성취도</h2><div id="areaReport"></div>
+ <h2 style="margin-top:18px">단계별 정답률</h2><div class="scroll"><table><thead><tr><th>단계</th><th>정답/풀이</th><th>정답률</th></tr></thead><tbody id="stageReport"></tbody></table></div>
+ <h2 style="margin-top:18px">자주 틀리는 유형 (오답 분석)</h2><div class="scroll"><table><thead><tr><th>유형</th><th>정답/풀이</th><th>정답률</th></tr></thead><tbody id="tagReport"></tbody></table></div>
+ <h2 style="margin-top:18px">복습 예정 단계</h2><div id="weakReport" class="muted"></div>
+ <h2 style="margin-top:18px">최근 학습 기록</h2><div class="scroll"><table><thead><tr><th>날짜</th><th>영역</th><th>풀이</th><th>정답</th><th>정답률</th></tr></thead><tbody id="history"></tbody></table></div>
+ <div class="row" style="margin-top:13px"><button class="primary" id="downloadReport">기록 CSV 다운로드</button><button class="secondary" id="backup">백업 파일 저장</button><label class="secondary" style="cursor:pointer">백업 불러오기<input id="restore" type="file" accept=".json,application/json" hidden></label></div>
+ <p class="notice" style="margin-top:12px">교사 안내: 이 결과표는 참고용 형성평가 기록입니다. 학생의 능력을 단정하는 점수로 사용하기보다 풀이 과정과 변화, 어려워하는 유형을 함께 살펴봐 주세요.</p></div>
+</section>
+<section class="panel" id="certificate">
+ <div class="card" id="certificateCard"><div class="cert"><div class="seal">🏅</div><h2>수학 왕국 기사 인증서</h2><p>위 학생은 꾸준한 도전과 노력으로<br><b>이상윤 수학 기사</b>의 여정을 완수하였으므로<br>이 인증서를 수여합니다.</p><h2 id="certName">이상윤 기사</h2><div style="font-size:42px;margin:15px">⚔️ ⭐ 🏰</div><p id="certStatus">현재까지의 도전 기록을 응원합니다!</p><p class="muted" id="certDate"></p><b>수학 왕국 모험단</b></div>
+ <div class="notice noPrint" style="margin-top:12px">90일 학습 도전과 25개 단계를 모두 통과하면 최종 인증서가 완성됩니다. 현재 진행 상황도 기념 인증서로 인쇄할 수 있습니다.</div><button class="primary full noPrint" id="printCert">인증서 인쇄 / PDF 저장</button></div>
+</section>
+<section class="card" id="play" style="display:none">
+ <div class="row"><button class="secondary" id="backMap">← 모험으로</button><b id="stageLabel">오늘의 성장 모험</b><span class="pill" id="qLabel">1번 문제</span></div><div class="bar" style="margin:12px 0"><span id="qBar" style="width:0%"></span></div>
+ <div class="quest"><div id="questionEmoji" style="font-size:38px">🌳</div><b id="missionTitle">첫 번째 임무</b><p class="muted" id="missionDesc">천천히 풀어도 괜찮아요.</p><div class="big" id="question">3 + 2 = ?</div>
+ <input id="answer" class="answer" inputmode="decimal" autocomplete="off" placeholder="정답을 입력하세요"><div id="choices" class="choices hide"></div>
+ <button class="primary full" id="check">정답 확인 ✨</button><div id="feedback" class="feedback hide" aria-live="polite"></div><div id="hint" class="hint hide"></div>
+ <button class="secondary full" id="hintBtn">💡 힌트 보기</button><button class="primary full hide" id="next">다음 문제 ➜</button></div>
+ <div class="row muted" style="margin-top:10px"><span>⭐ 이번 학습 <b id="sessionStars">0</b></span><span id="sessionScore">첫 시도 정답 0개</span></div>
+</section>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const dstr=d=>d.toLocaleDateString('sv-SE'),today=()=>dstr(new Date());
+const tomorrow=()=>{const d=new Date();d.setDate(d.getDate()+1);return dstr(d)};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ===== 단계 구성: 5개 영역 × 5단계 = 25단계 (초등 5학년 수준까지) ===== */
+const STAGES=[
+"네 자리 수 계산과 곱셈 다지기","세 자리 수 × 두 자리 수","나눗셈과 나머지","곱셈·나눗셈 □ 구하기","덧셈·뺄셈·곱셈이 섞인 계산",
+"네 가지 연산의 혼합 계산","괄호가 있는 혼합 계산","괄호와 여러 연산 도전","식 세우기 문장제","혼합 계산 종합",
+"약수와 배수","공약수와 공배수","최대공약수","최소공배수","약수·배수 종합",
+"약분과 기약분수","통분과 분수의 크기 비교","분모가 다른 분수의 덧셈·뺄셈","대분수의 덧셈·뺄셈","분수와 소수의 관계",
+"분수의 곱셈","대분수의 곱셈","소수의 곱셈","어림하기·수의 범위·평균","5학년 종합 챔피언"];
+const worlds=[
+{name:"연산 마을",e:"🏡",desc:"큰 수의 곱셈과 나눗셈 다지기"},
+{name:"혼합 계산 성",e:"🏯",desc:"연산 순서와 괄호 정복"},
+{name:"약수·배수 산",e:"⛰️",desc:"약수와 배수의 규칙 찾기"},
+{name:"분수 마법의 숲",e:"🧚",desc:"약분·통분과 분수의 덧셈·뺄셈"},
+{name:"수학 왕국",e:"🏰",desc:"분수·소수의 곱셈과 어림하기 최종 도전"}];
+const areas=worlds.map(w=>w.name);
+const BADGES=["계산 용사","순서 지휘관","약수·배수 탐험가","분수 마법사","수학 왕국의 수호 기사"];
+const stageName=i=>`Lv.${i+1} ${STAGES[i]}`;
+const LEVELUP_MIN=8,LEVELUP_RATE=0.8,WINDOW=10,SESSION=12;
+const gear=[
+{slot:"투구",name:"초보 기사의 투구",e:"⛑️",cost:0},{slot:"투구",name:"황금 투구",e:"👑",cost:35},
+{slot:"갑옷",name:"용기의 갑옷",e:"🦺",cost:25},{slot:"방패",name:"별빛 방패",e:"🛡️",cost:30},
+{slot:"무기",name:"용사의 검",e:"⚔️",cost:40},{slot:"망토",name:"무지개 망토",e:"🧣",cost:50},
+{slot:"동료",name:"지혜로운 올빼미",e:"🦉",cost:45},{slot:"동료",name:"용감한 아기 용",e:"🐉",cost:60}];
+
+/*GEN-START*/
+/* ===== 시드 기반 난수: 같은 seed → 같은 문제 (오답 문제를 다음 날 똑같이 다시 출제하기 위함) ===== */
+let RNG=Math.random;
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const rand=(a,b)=>Math.floor(RNG()*(b-a+1))+a;
+const pick=a=>a[rand(0,a.length-1)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rand(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+const gcd=(a,b)=>b?gcd(b,a%b):a,lcm=(a,b)=>a/gcd(a,b)*b;
+const divs=n=>{const r=[];for(let i=1;i<=n;i++)if(n%i===0)r.push(i);return r};
+const fmt=n=>n>=10000?n.toLocaleString('ko-KR'):String(n);
+const red=(n,d)=>{const g=gcd(n,d);return{n:n/g,d:d/g}};
+const fr=(n,d)=>`<span class="fr"><i>${n}</i><i>${d}</i></span>`;
+const mixed=(w,n,d)=>`<span class="mx">${w}${fr(n,d)}</span>`;
+const ft=(n,d)=>{if(d===1)return String(n);if(n<d)return `${n}/${d}`;const w=Math.floor(n/d),r=n%d;return r?`${w} ${r}/${d} (=${n}/${d})`:String(w)};
+const disp=s=>s.replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−');
+const calc=js=>Function('"use strict";return ('+js+')')();
+const ltr=js=>{const t=js.trim().split(/\s+/);let v=+t[0];for(let i=1;i<t.length;i+=2){const o=t[i],n=+t[i+1];v=o==='+'?v+n:o==='-'?v-n:o==='*'?v*n:v/n}return v};
+const dc=(A,p)=>(A/10**p).toFixed(p);
+const nz=(lo,hi)=>{let x;do{x=rand(lo,hi)}while(x%10===0);return x};
+const PL={10:'십',100:'백',1000:'천'};
+const P=(tag,q,type,ans,hint,o={})=>({tag,q,type,ans,hint,...o});
+const dtr=ans=>[{v:ans*10,msg:'소수점의 위치를 다시 확인해 보세요.'},{v:ans/10,msg:'소수점의 위치를 다시 확인해 보세요.'}];
+function ex(js,tag,hint){
+ const ans=calc(js),traps=[],np=js.replace(/[()]/g,'');
+ if(js.includes('(')){const t2=calc(np);if(Number.isFinite(t2)&&t2!==ans)traps.push({v:t2,msg:'괄호 안을 먼저 계산해야 해요.'})}
+ const t1=ltr(np);
+ if(Number.isInteger(t1)&&t1!==ans&&!traps.some(x=>x.v===t1))traps.push({v:t1,msg:'앞에서부터 차례로 계산하면 안 돼요. 곱셈·나눗셈을 먼저 계산해요!'});
+ return P(tag,disp(js)+' = ?','num',ans,hint,{traps});
+}
+const G=[];
+/* --- 연산 마을 (4학년 마무리~5학년 진입) --- */
+G[0]=()=>{const t=rand(0,3);let a,b;
+ if(t===0){a=rand(1200,8900);b=rand(1100,7900);return P('받아올림 덧셈',`${fmt(a)} + ${fmt(b)} = ?`,'num',a+b,'일의 자리부터 자릿값을 맞추어 더하고, 10이 넘으면 윗자리로 올려요.')}
+ if(t===1){a=rand(2500,9999);b=rand(1100,a-400);return P('받아내림 뺄셈',`${fmt(a)} − ${fmt(b)} = ?`,'num',a-b,'모자라는 자리는 윗자리에서 10을 빌려와요.')}
+ if(t===2){a=rand(23,99);b=rand(3,9);return P('곱셈',`${a} × ${b} = ?`,'num',a*b,'십의 자리와 일의 자리를 나누어 곱해요.')}
+ a=rand(123,899);b=rand(3,9);return P('곱셈',`${a} × ${b} = ?`,'num',a*b,'백, 십, 일의 자리를 차례로 곱해 더해요.')};
+G[1]=()=>{let a,b;if(rand(0,2)===0){a=rand(21,99);b=rand(21,99)}else{a=rand(112,489);b=rand(12,48)}
+ return P('곱셈(두 자리 곱하기)',`${a} × ${b} = ?`,'num',a*b,`${b}를 ${b-b%10}과 ${b%10}로 나누어 각각 곱한 뒤 더해요.`)};
+G[2]=()=>{const b=rand(12,48),t=rand(0,3);
+ if(t===0){const q=rand(12,40);return P('나눗셈',`${b*q} ÷ ${b} = ?`,'num',q,`${b}에 몇을 곱하면 ${b*q}에 가까워지는지 어림해 보세요.`)}
+ const q=rand(8,25),r=rand(1,b-1),a=b*q+r,h=`${b}×(몫)이 ${a}를 넘지 않는 가장 큰 곱을 찾고, 남은 수가 나머지예요.`;
+ if(t===1||t===3)return P('나머지 있는 나눗셈(몫)',`${a} ÷ ${b} 의 몫은?`,'num',q,h,{traps:[{v:r,msg:'그건 나머지예요. 몫을 구해 보세요.'}]});
+ return P('나머지 있는 나눗셈(나머지)',`${a} ÷ ${b} 의 나머지는?`,'num',r,h,{traps:[{v:q,msg:'그건 몫이에요. 나머지를 구해 보세요.'}]})};
+G[3]=()=>{const t=rand(0,4),ask='□ 안에 알맞은 수를 구하세요.';
+ if(t===0){const b=rand(12,35),x=rand(12,60);return P('□ 구하기',`□ × ${b} = ${b*x}`,'num',x,'곱셈식을 나눗셈식으로 바꾸어 보세요.',{ask})}
+ if(t===1){const b=rand(6,24),q=rand(6,30);return P('□ 구하기',`${b*q} ÷ □ = ${q}`,'num',b,'나누는 수 = 나누어지는 수 ÷ 몫',{ask})}
+ if(t===2){const b=rand(6,25),q=rand(8,30);return P('□ 구하기',`□ ÷ ${b} = ${q}`,'num',b*q,'나누어지는 수 = 몫 × 나누는 수',{ask})}
+ if(t===3){const a=rand(500,2000),c=rand(100,a-100);return P('□ 구하기',`${a} − □ = ${c}`,'num',a-c,'빼는 수 = 처음 수 − 차',{ask})}
+ const b=rand(100,900),c=rand(100,900);return P('□ 구하기',`□ − ${b} = ${c}`,'num',b+c,'처음 수 = 차 + 빼는 수',{ask})};
+G[4]=()=>{const a=rand(25,150),b=rand(3,12),c=rand(2,9),d=rand(2,9),f=rand(0,3);
+ const js=[`${a} + ${b} * ${c}`,`${a} * ${c} - ${b}`,`${rand(b*c+10,b*c+120)} - ${b} * ${c}`,`${a} * ${c} + ${b} * ${d}`][f];
+ return ex(js,'연산 순서','곱셈을 먼저 계산하고, 덧셈과 뺄셈은 나중에 해요.')};
+/* --- 혼합 계산 성 (5-1 자연수의 혼합 계산) --- */
+G[5]=()=>{const y=rand(2,9),k=rand(3,15),z=rand(2,9),w=rand(2,9),a=rand(90,200),f=rand(0,4);
+ const js=[`${y*k} / ${y} + ${z} * ${w}`,`${a+k} - ${y*k} / ${y}`,`${a} * ${z} - ${y*k} / ${y}`,`${a} - ${w} * ${z} + ${y*k} / ${y}`,`${a} + ${y*k} / ${y} * ${w}`][f];
+ return ex(js,'연산 순서','곱셈과 나눗셈을 먼저, 덧셈과 뺄셈은 나중에 계산해요.')};
+G[6]=()=>{const f=rand(0,4);let js;
+ if(f===0){const a=rand(12,60),b=rand(5,40),c=rand(2,9);js=`(${a} + ${b}) * ${c}`}
+ else if(f===1){const p=rand(30,90),q=rand(5,p-5),c=rand(2,9);js=`${c} * (${p} - ${q})`}
+ else if(f===2){const c=rand(3,9),k=rand(4,20),b=rand(10,60);js=`(${b+c*k} - ${b}) / ${c}`}
+ else if(f===3){const b=rand(2,12),c=rand(2,9),k=rand(3,12);js=`${(b+c)*k} / (${b} + ${c})`}
+ else{const a=rand(12,60),b=rand(5,40),c=rand(2,9),d=rand(5,30);js=`(${a} + ${b}) * ${c} - ${d}`}
+ return ex(js,'괄호 계산','괄호 안을 가장 먼저 계산해요.')};
+G[7]=()=>{const f=rand(0,2);let js;
+ if(f===0){const a=rand(20,90),b=rand(20,60),c=rand(5,b-5),d=rand(2,9);js=`${a} + (${b} - ${c}) * ${d}`}
+ else if(f===1){const c=rand(3,9),k=rand(3,15),tot=c*k,s1=rand(1,tot-1),s2=tot-s1,d=rand(2,9),e=rand(2,9);js=`(${s1} + ${s2}) / ${c} + ${d} * ${e}`}
+ else{const a=rand(12,30),b=rand(5,12),c=rand(1,6),d=rand(1,6),e=rand(2,4);js=`${a} * ${b} - (${c} + ${d}) * ${e}`}
+ return ex(js,'혼합 계산(괄호 포함)','괄호 → 곱셈·나눗셈 → 덧셈·뺄셈 순서로 계산해요.')};
+G[8]=()=>{const t=rand(0,3);
+ if(t===0){const a=rand(12,30),b=rand(6,15),c=rand(10,70);return P('문장제(식 세우기)',`연필이 한 상자에 ${a}자루씩 ${b}상자 있습니다. 그중 ${c}자루를 친구들에게 나누어 주었다면 남은 연필은 몇 자루일까요?`,'num',a*b-c,'전체 연필 수를 먼저 구한 뒤, 나누어 준 수를 빼요.')}
+ if(t===1){const n=rand(6,15),k=rand(4,12),e=rand(1,n-1);return P('문장제(식 세우기)',`공책 ${n*k+e}권을 ${n}명에게 똑같이 나누어 주었더니 ${e}권이 남았습니다. 한 명이 받은 공책은 몇 권일까요?`,'num',k,'남은 공책을 빼고 나눠 준 공책 수를 구한 뒤 사람 수로 나눠요.')}
+ if(t===2){const p=pick([300,400,500,600,700]),n=rand(3,8),q=pick([800,1200,1500,2000]),m=rand(2,4),tot=p*n+q*m,pay=Math.ceil((tot+1)/1000)*1000;
+  return P('문장제(식 세우기)',`한 개에 ${p}원인 사탕 ${n}개와 한 봉지에 ${q}원인 과자 ${m}봉지를 사고 ${pay}원을 냈습니다. 거스름돈은 얼마일까요?`,'num',pay-tot,'(사탕값 + 과자값)을 먼저 구하고 낸 돈에서 빼요.')}
+ const a=rand(3,9),x=rand(5,40),b=rand(5,50);return P('문장제(식 세우기)',`어떤 수에 ${a}를 곱한 뒤 ${b}를 더했더니 ${a*x+b}가 되었습니다. 어떤 수는 얼마일까요?`,'num',x,'거꾸로 계산해 보세요. 먼저 더한 수를 빼고, 곱한 수로 나눠요.')};
+G[9]=()=>pick([G[5],G[6],G[7],G[8]])();
+/* --- 약수·배수 산 (5-1 약수와 배수) --- */
+const N10=[12,16,18,20,24,28,30,36,40,42,45,48,56,60,72];
+G[10]=()=>{const t=rand(0,4),n=pick(N10),d=divs(n);
+ if(t===0)return P('약수',`${n}의 약수는 모두 몇 개일까요?`,'num',d.length,`${n}을 1, 2, 3, … 으로 나누어 나누어떨어지는 수를 모두 찾아요.`);
+ if(t===1)return P('약수',`${n}의 약수 중 ${n}을 제외하고 가장 큰 수는 얼마일까요?`,'num',d[d.length-2],`${n}의 약수를 작은 수부터 모두 구해 보세요.`);
+ if(t===2){const a=rand(4,12),m=rand(5,15),b=a*m+rand(1,a-1);return P('배수',`${a}의 배수 중 ${b}보다 크면서 가장 작은 수는 얼마일까요?`,'num',a*(m+1),`${a}씩 뛰어 세어 ${b}를 처음 넘는 수를 찾아요.`)}
+ if(t===3){const a=rand(3,9),N=rand(40,150);return P('배수',`1부터 ${N}까지의 자연수 중 ${a}의 배수는 모두 몇 개일까요?`,'num',Math.floor(N/a),`${N}÷${a}의 몫이 배수의 개수예요.`)}
+ const cand=[];for(let x=3;x<n;x++)if(n%x!==0)cand.push(x);const non=pick(cand),ch=shuffle([...shuffle(d).slice(0,3),non]);
+ return P('약수',`다음 중 ${n}의 약수가 아닌 것은?`,'choice',String(non),`각 수로 ${n}을 나누어 나누어떨어지지 않는 수를 찾아요.`,{choices:ch.map(x=>({v:String(x),h:String(x)}))})};
+const cop=(gs,mlo,mhi)=>{const g=pick(gs);let m1,m2;do{m1=rand(mlo,mhi);m2=rand(mlo,mhi)}while(m1===m2||gcd(m1,m2)!==1);return{g,a:g*m1,b:g*m2}};
+G[11]=()=>{const t=rand(0,2);
+ if(t===0){const{g,a,b}=cop([4,6,8,9,10,12,14,15,16,18,20,24],2,7);return P('공약수',`${a}와 ${b}의 공약수는 모두 몇 개일까요?`,'num',divs(gcd(a,b)).length,'두 수의 최대공약수를 구하면, 그 수의 약수가 곧 공약수예요.')}
+ if(t===1){let a,b,l;do{a=rand(2,9);b=rand(2,9);l=a===b?999:lcm(a,b)}while(l>60);return P('공배수',`${a}와 ${b}의 공배수 중 가장 작은 두 자리 수는 얼마일까요?`,'num',Math.ceil(10/l)*l,'최소공배수의 배수가 공배수예요. 10 이상이 되는 첫 수를 찾아요.')}
+ const{g,a,b}=cop([4,6,8,9,10,12,14,15,16,18,20,24],2,7),ds=divs(g);
+ let c=divs(a).filter(x=>b%x!==0);if(!c.length)c=[a+1];const non=pick(c),ch=shuffle([...shuffle(ds).slice(0,3),non]);
+ return P('공약수',`다음 중 ${a}와 ${b}의 공약수가 아닌 것은?`,'choice',String(non),'두 수를 모두 나누어떨어지게 하는지 확인해 보세요.',{choices:ch.map(x=>({v:String(x),h:String(x)}))})};
+G[12]=()=>{const t=rand(0,2);let m1,m2;const g=rand(2,15);do{m1=rand(2,9);m2=rand(2,9)}while(m1===m2||gcd(m1,m2)!==1);
+ const a=g*m1,b=g*m2,l=lcm(a,b),traps=[{v:l,msg:'그건 최소공배수예요. 최대공약수는 두 수를 모두 나눌 수 있는 가장 큰 수예요.'}];
+ if(t<2)return P('최대공약수',`${a}와 ${b}의 최대공약수는?`,'num',gcd(a,b),'두 수의 약수를 구해 공통인 약수 중 가장 큰 수를 찾아요.',{traps});
+ return P('최대공약수',`사과 ${a}개와 귤 ${b}개를 남김없이 똑같이 나누어 최대한 많은 접시에 담으려고 합니다. 접시는 몇 개일까요?`,'num',gcd(a,b),'두 수의 최대공약수가 접시의 수예요.',{traps})};
+G[13]=()=>{let a,b;do{a=rand(4,18);b=rand(4,18)}while(a===b);const l=lcm(a,b),g=gcd(a,b),traps=[];
+ if(g>1)traps.push({v:g,msg:'그건 최대공약수예요. 최소공배수는 두 수의 공통 배수 중 가장 작은 수예요.'});
+ if(a*b!==l)traps.push({v:a*b,msg:'두 수의 곱은 공배수이지만 가장 작은 공배수는 아니에요.'});
+ if(rand(0,1)===0)return P('최소공배수',`${a}와 ${b}의 최소공배수는?`,'num',l,'두 수의 배수를 차례로 쓰며 처음 만나는 공통 배수를 찾아요.',{traps});
+ return P('최소공배수',`1번 버스는 ${a}분마다, 2번 버스는 ${b}분마다 출발합니다. 두 버스가 동시에 출발했다면 다음에 동시에 출발하는 때는 몇 분 후일까요?`,'num',l,'두 수의 최소공배수를 구해요.',{traps})};
+G[14]=()=>{const t=rand(0,5);if(t<=3)return pick([G[10],G[11],G[12],G[13]])();
+ const s=[2,3,4,5,6,8,9,10,12];const a=pick(s);let b,c;do{b=pick(s)}while(b===a);do{c=pick(s)}while(c===a||c===b);
+ if(t===4)return P('최소공배수(세 수)',`${a}, ${b}, ${c}의 최소공배수는?`,'num',lcm(lcm(a,b),c),'두 수의 최소공배수를 먼저 구하고, 그 수와 나머지 한 수의 최소공배수를 구해요.');
+ const g=rand(2,9),A=g*a,B=g*b,C=g*c;return P('최대공약수(세 수)',`${A}, ${B}, ${C}의 최대공약수는?`,'num',gcd(gcd(A,B),C),'세 수를 모두 나눌 수 있는 가장 큰 수를 찾아요.')};
+/* --- 분수 마법의 숲 (5-1 약분·통분, 분수의 덧셈과 뺄셈) --- */
+const cp=(dmin,dmax)=>{let n,d;do{d=rand(dmin,dmax);n=rand(1,d-1)}while(gcd(n,d)!==1);return[n,d]};
+G[15]=()=>{const t=rand(0,3);
+ if(t<=1){const[n,d]=cp(3,12),g=rand(2,8);return P('약분',`${fr(n*g,d*g)} 을(를) 기약분수로 나타내면?`,'frac',{n,d},'분자와 분모를 두 수의 최대공약수로 나누어요.',{ask:'3/4 처럼 입력하세요.'})}
+ if(t===2){const[n,d]=cp(3,12),g=rand(2,8);return P('약분',`${fr(n*g,d*g)} 의 분모와 분자의 최대공약수는?`,'num',g,'분모와 분자를 모두 나눌 수 있는 가장 큰 수예요.')}
+ const d=rand(2,9),n=rand(1,d-1),k=rand(2,6);return P('크기가 같은 분수',`${fr(n,d)} = ${fr('□',d*k)}`,'num',n*k,'분모에 곱한 수를 분자에도 곱해요.',{ask:'□ 안에 알맞은 수를 구하세요.'})};
+G[16]=()=>{const t=rand(0,3);
+ if(t===0){let d1,d2;do{d1=rand(2,12);d2=rand(2,12)}while(d1===d2);const l=lcm(d1,d2);
+  return P('통분',`분모가 ${d1}, ${d2}인 두 분수를 통분할 때, 가장 작은 공통분모는?`,'num',l,'두 분모의 최소공배수가 가장 작은 공통분모예요.',{traps:d1*d2!==l?[{v:d1*d2,msg:'곱한 수도 공통분모지만 가장 작은 공통분모는 아니에요.'}]:[]})}
+ const k=t===3?3:2,arr=[];let g=0;
+ while(arr.length<k&&g++<500){const d=rand(3,12),n=rand(1,d-1);if(arr.every(x=>x.d!==d&&x.n*d!==n*x.d))arr.push({n,d})}
+ const big=rand(0,1)===0,sorted=arr.slice().sort((x,y)=>x.n*y.d-y.n*x.d),w=big?sorted[sorted.length-1]:sorted[0];
+ return P('분수 크기 비교',`다음 분수 중 가장 ${big?'큰':'작은'} 분수는?`,'choice',`${w.n}/${w.d}`,'분모를 같게 통분하여 분자의 크기를 비교해요.',{choices:arr.map(x=>({v:`${x.n}/${x.d}`,h:fr(x.n,x.d)}))})};
+G[17]=()=>{let d1,d2;do{d1=rand(2,9);d2=rand(2,9)}while(d1===d2);let n1=rand(1,d1-1),n2=rand(1,d2-1);const plus=rand(0,1)===0;
+ if(!plus){if(n1*d2<n2*d1){[n1,n2]=[n2,n1];[d1,d2]=[d2,d1]}if(n1*d2===n2*d1)return G[17]()}
+ const num=plus?n1*d2+n2*d1:n1*d2-n2*d1,den=d1*d2,traps=plus?[{n:n1+n2,d:d1+d2,msg:'분모끼리 더하면 안 돼요. 먼저 통분해요.'}]:[];
+ return P(plus?'분수 덧셈(통분)':'분수 뺄셈(통분)',`${fr(n1,d1)} ${plus?'+':'−'} ${fr(n2,d2)} = ?`,'frac',red(num,den),`분모 ${lcm(d1,d2)}로 통분한 뒤 계산하고, 기약분수로 나타내요.`,{ask:'기약분수 또는 대분수로 입력하세요. (예: 3/4, 1 1/2)',traps})};
+G[18]=()=>{const[xn,xd]=cp(2,8),[yn,yd]=cp(2,8);let x={w:rand(1,5),n:xn,d:xd},y={w:rand(1,4),n:yn,d:yd};
+ const plus=rand(0,1)===0,val=o=>o.w*o.d+o.n;
+ if(!plus){if(val(x)*y.d<val(y)*x.d){[x,y]=[y,x]}if(val(x)*y.d===val(y)*x.d)return G[18]()}
+ const num=plus?val(x)*y.d+val(y)*x.d:val(x)*y.d-val(y)*x.d,den=x.d*y.d;
+ return P(plus?'대분수 덧셈':'대분수 뺄셈',`${mixed(x.w,x.n,x.d)} ${plus?'+':'−'} ${mixed(y.w,y.n,y.d)} = ?`,'frac',red(num,den),'대분수를 가분수로 바꾸어 계산하거나 자연수·분수 부분을 따로 계산해요. 분모가 다르면 통분해요.',{ask:'기약분수 또는 대분수로 입력하세요. (예: 3/4, 1 1/2)'})};
+G[19]=()=>{const t=rand(0,3);
+ if(t===0){const d=pick([2,4,5,8,10,20,25]),n=rand(1,d-1);return P('분수→소수',`${fr(n,d)} 을(를) 소수로 나타내면?`,'num',n/d,'분모를 10, 100, 1000으로 만들거나 분자÷분모를 계산해요.')}
+ if(t===1){let H;do{H=rand(11,299)}while(H%100===0);return P('소수→분수',`${H/100} 을(를) 기약분수로 나타내면?`,'frac',red(H,100),'소수를 분모가 100인 분수로 바꾼 뒤 약분해요.',{ask:'기약분수 또는 대분수로 입력하세요.'})}
+ const items=[];let g=0;
+ while(items.length<3&&g++<300){let it;
+  if(rand(0,1)){const d=pick([2,4,5,8,10]),n=rand(1,d*2-1);it={val:n/d,v:`${n}/${d}`,h:fr(n,d)}}
+  else{const H=rand(11,199);it={val:H/100,v:String(H/100),h:String(H/100)}}
+  if(!items.some(x=>Math.abs(x.val-it.val)<1e-9))items.push(it)}
+ const big=t===2,s=items.slice().sort((x,y)=>x.val-y.val),w=big?s[2]:s[0];
+ return P('분수·소수 크기 비교',`다음 세 수 중 가장 ${big?'큰':'작은'} 수는?`,'choice',w.v,'분수를 소수로 바꾸거나 소수를 분수로 바꾸어 비교해요.',{choices:items.map(x=>({v:x.v,h:x.h}))})};
+/* --- 수학 왕국 (5-2 분수·소수의 곱셈, 어림하기, 평균) --- */
+G[20]=()=>{const t=rand(0,3),ask='기약분수 또는 대분수로 입력하세요. (예: 3/4, 1 1/2)';
+ if(t===0){const d=rand(3,9),n=rand(1,d-1),k=rand(2,9);return P('분수×자연수',`${fr(n,d)} × ${k} = ?`,'frac',red(n*k,d),'분자에 자연수를 곱한 뒤 약분해요.',{ask,traps:[{n,d,msg:'자연수는 분자에만 곱해요.'}]})}
+ if(t===1){const d=rand(3,9),n=rand(1,d-1),k=rand(2,9);return P('분수×자연수',`${k} × ${fr(n,d)} = ?`,'frac',red(n*k,d),'자연수를 분자에 곱한 뒤 약분해요.',{ask})}
+ if(t===2){const d1=rand(2,9),d2=rand(2,9),n1=rand(1,d1-1),n2=rand(1,d2-1);return P('분수×분수',`${fr(n1,d1)} × ${fr(n2,d2)} = ?`,'frac',red(n1*n2,d1*d2),'분자끼리, 분모끼리 곱한 뒤 약분해요.',{ask})}
+ const m=rand(2,8),d=rand(3,9),n=rand(1,d-1);return P('분수의 곱셈(문장)',`${d*m}의 ${fr(n,d)} 은(는) 얼마일까요?`,'num',n*m,`${d*m} × ${n}/${d} 를 계산해요.`)};
+G[21]=()=>{const t=rand(0,2),ask='기약분수 또는 대분수로 입력하세요. (예: 3/4, 1 1/2)';
+ if(t===0){const w=rand(1,4),[n,d]=cp(2,6),k=rand(2,8);return P('대분수 곱셈',`${mixed(w,n,d)} × ${k} = ?`,'frac',red((w*d+n)*k,d),'대분수를 가분수로 바꾸어 곱해요.',{ask})}
+ if(t===1){const w1=rand(1,3),[n1,d1]=cp(2,6),w2=rand(1,3),[n2,d2]=cp(2,6);
+  return P('대분수 곱셈',`${mixed(w1,n1,d1)} × ${mixed(w2,n2,d2)} = ?`,'frac',red((w1*d1+n1)*(w2*d2+n2),d1*d2),'두 대분수를 모두 가분수로 바꾸어 곱해요.',{ask,traps:[{n:w1*w2*d1*d2+n1*n2,d:d1*d2,msg:'대분수는 가분수로 바꾸어 곱해야 해요.'}]})}
+ const d=rand(2,8),n=rand(1,d-1),d2=rand(2,8),n2=rand(1,d2-1);
+ return P('분수의 곱셈(문장)',`물 ${fr(n,d)}L의 ${fr(n2,d2)} 만큼 마셨습니다. 마신 물은 몇 L일까요?`,'frac',red(n*n2,d*d2),'분수끼리 곱해서 구해요.',{ask})};
+G[22]=()=>{const t=rand(0,4);
+ if(t===0){const A=nz(12,99),k=rand(2,9),a=A*k/10;return P('소수의 곱셈',`${dc(A,1)} × ${k} = ?`,'num',a,'소수점을 없애고 곱한 뒤, 소수점 아래 자리 수만큼 소수점을 찍어요.',{traps:dtr(a)})}
+ if(t===1){const A=nz(12,59),B=nz(12,39),a=A*B/100;return P('소수의 곱셈',`${dc(A,1)} × ${dc(B,1)} = ?`,'num',a,'소수점을 없애고 곱한 뒤, 소수점 아래 자리 수의 합만큼 소수점을 찍어요.',{traps:dtr(a)})}
+ if(t===2){const k=rand(12,60),B=nz(12,99),a=k*B/10;return P('소수의 곱셈',`${k} × ${dc(B,1)} = ?`,'num',a,'소수점을 없애고 곱한 뒤 소수점을 다시 찍어요.',{traps:dtr(a)})}
+ if(t===3){const x=nz(12,99),y=nz(12,99),p=pick([1,2]),q=pick([1,2]),a=x*y/10**(p+q);
+  return P('소수점 위치',`${x} × ${y} = ${x*y} 일 때, ${dc(x,p)} × ${dc(y,q)} = ?`,'num',a,'소수점 아래 자리 수를 모두 더한 만큼 소수점을 옮겨 찍어요.',{traps:dtr(a)})}
+ const C=nz(11,99),B=nz(12,99),a=C*B/1000;return P('소수의 곱셈',`${dc(C,2)} × ${dc(B,1)} = ?`,'num',a,'소수점 아래 자리 수는 2 + 1 = 3자리가 돼요.',{traps:dtr(a)})};
+G[23]=()=>{const t=rand(0,5),HH={올림:'구하려는 자리 아래에 0이 아닌 수가 있으면 그 자리 수를 1 크게 하고, 아래는 모두 0으로 해요.',버림:'구하려는 자리 아래 수를 모두 0으로 바꿔요.',반올림:'구하려는 자리 바로 아래 수가 5 이상이면 올리고, 4 이하면 버려요.'};
+ if(t<=1){const n=rand(1234,98765),u=pick([10,100,1000]),m=pick(['올림','버림','반올림']);if(n%u===0)return G[23]();
+  const f={올림:Math.ceil(n/u)*u,버림:Math.floor(n/u)*u,반올림:Math.round(n/u)*u};
+  const traps=Object.keys(f).filter(k=>k!==m&&f[k]!==f[m]).map(k=>({v:f[k],msg:`그건 ${k}한 값이에요. ${m}하는 방법을 다시 확인해요.`}));
+  return P(m,`${fmt(n)} 을(를) ${m}하여 ${PL[u]}의 자리까지 나타내면?`,'num',f[m],HH[m],{traps})}
+ if(t===2){const T=rand(1001,9999),p=pick([1,2]),u=p===1?100:10,m=pick(['올림','버림','반올림']);if(T%u===0)return G[23]();
+  const c={올림:Math.ceil(T/u),버림:Math.floor(T/u),반올림:Math.round(T/u)}[m];
+  return P(m,`${(T/1000).toFixed(3)} 을(를) ${m}하여 소수 ${p===1?'첫째':'둘째'} 자리까지 나타내면?`,'num',c*u/1000,HH[m])}
+ if(t===3){const avg=rand(65,95);let a,b,c,d;do{a=rand(avg-15,avg+15);b=rand(avg-15,avg+15);c=rand(avg-15,avg+15);d=avg*4-a-b-c}while(d<40||d>100);
+  return P('평균',`국어 ${a}점, 수학 ${b}점, 사회 ${c}점, 과학 ${d}점일 때, 네 과목 점수의 평균은 몇 점일까요?`,'num',avg,'(점수의 합) ÷ (과목 수)로 구해요.',{traps:[{v:a+b+c+d,msg:'합을 과목 수로 나누어야 평균이에요.'}]})}
+ if(t===4){const a=rand(10,60),b=a+rand(4,20);return P('수의 범위',`${a} 이상 ${b} 미만인 자연수는 모두 몇 개일까요?`,'num',b-a,`${a}는 포함하고 ${b}는 포함하지 않아요.`,{traps:[{v:b-a+1,msg:`미만은 ${b}를 포함하지 않아요.`}]})}
+ const a=rand(10,60),b=a+rand(4,20);return P('수의 범위',`${a} 초과 ${b} 이하인 자연수는 모두 몇 개일까요?`,'num',b-a,`${a}는 포함하지 않고 ${b}는 포함해요.`,{traps:[{v:b-a+1,msg:`초과는 ${a}를 포함하지 않아요.`}]})};
+G[24]=()=>pick([G[6],G[7],G[8],G[12],G[13],G[17],G[18],G[19],G[20],G[21],G[22],G[23]])();
+function gen(stage,seed){if(seed===undefined)seed=Math.floor(Math.random()*2147483647);RNG=mulberry32(seed);let p;try{p=G[stage]()}finally{RNG=Math.random}p.stage=stage;p.seed=seed;return p}
+/*GEN-END*/
+
+/* ===== 저장 데이터 ===== */
+const KEY="sangyoonMath90v2",OLD="sangyoonMath90";
+const base={ver:2,stars:0,coins:0,solved:0,correct:0,cleared:[],badges:[],history:[],days:[],lastDay:"",streak:0,items:["초보 기사의 투구"],equipped:{투구:"초보 기사의 투구"},chests:0,daily:{date:today(),count:0},stage:{},tags:{},weak:{},level:0,win:[]};
+const clone=o=>JSON.parse(JSON.stringify(o));
+function sanitize(s){
+ const d={...clone(base),...s};
+ d.level=Math.max(0,Math.min(24,parseInt(d.level)||0));
+ ['cleared','badges','history','days','items','win'].forEach(k=>{if(!Array.isArray(d[k]))d[k]=[]});
+ d.cleared=d.cleared.filter(x=>Number.isInteger(x)&&x>=0&&x<25);
+ d.win=d.win.map(x=>x?1:0).slice(-WINDOW);
+ d.history=d.history.map(x=>({date:String(x.date||''),area:String(x.area||''),s:+x.s||0,c:+x.c||0})).slice(-100);
+ if(!d.equipped||typeof d.equipped!=='object'||Array.isArray(d.equipped))d.equipped={투구:"초보 기사의 투구"};
+ if(!d.daily||typeof d.daily!=='object')d.daily={date:today(),count:0};
+ const st={};if(d.stage&&typeof d.stage==='object')Object.keys(d.stage).forEach(k=>{if(k>=0&&k<25&&d.stage[k])st[k]={s:+d.stage[k].s||0,c:+d.stage[k].c||0}});d.stage=st;
+ const tg={};if(d.tags&&typeof d.tags==='object')Object.keys(d.tags).forEach(k=>{const v=d.tags[k];if(v&&typeof v==='object')tg[k]={s:+v.s||0,c:+v.c||0,stage:+v.stage||0}});d.tags=tg;
+ const wk={};if(d.weak&&typeof d.weak==='object')Object.keys(d.weak).forEach(k=>{const w=d.weak[k];if(k>=0&&k<25&&w&&/^\d{4}-\d{2}-\d{2}$/.test(String(w.due)))wk[k]={due:w.due,seeds:(Array.isArray(w.seeds)?w.seeds:[]).filter(Number.isInteger).slice(0,6),tries:+w.tries||0}});d.weak=wk;
+ return d}
+let data=clone(base);
+try{const s=JSON.parse(localStorage.getItem(KEY));
+ if(s)data=sanitize(s);
+ else{const o=JSON.parse(localStorage.getItem(OLD));if(o)data=sanitize(Object.fromEntries(['stars','coins','solved','correct','badges','history','days','lastDay','streak','items','equipped','chests'].filter(k=>o[k]!==undefined).map(k=>[k,o[k]])))}}catch(e){}
+if(data.daily.date!==today())data.daily={date:today(),count:0};
+let world=Math.floor(data.level/5),S=null,cur=null,answered=false,attempts=0;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
+
+/* ===== 화면 ===== */
+function tab(name){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===name));$("play").style.display="none"}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+const dueStages=()=>Object.keys(data.weak).map(Number).filter(id=>data.weak[id].due<=today()).sort((a,b)=>data.weak[a].due.localeCompare(data.weak[b].due)||a-b);
+function setProgress(){const n=data.days.length;$("dayNo").textContent=Math.min(90,n+1)+"일차";$("dayPill").textContent="오늘 "+data.daily.count+"문제";$("dailyText").textContent=`오늘 ${data.daily.count}문제 해결 · 권장 목표 ${SESSION}문제`;$("dailyBar").style.width=Math.min(100,data.daily.count/SESSION*100)+"%";$("journeyCount").textContent=n+" / 90일 학습";$("journeyPercent").textContent=Math.round(n/90*100)+"%";$("journeyBar").style.width=Math.min(100,n/90*100)+"%";$("stars").textContent=data.stars;$("coins").textContent=data.coins;$("streak").textContent=data.streak+"일";$("reviewCount").textContent=dueStages().length}
+function renderHome(){
+ const lv=data.level,w=data.win,sm=w.reduce((a,b)=>a+b,0),acc=w.length?Math.round(sm/w.length*100):0;
+ $("storyTitle").textContent="현재 "+stageName(lv);
+ $("storyText").textContent=lv===24&&data.cleared.includes(24)?"모든 단계를 통과했어요! 이제 5학년 종합 문제로 실력을 유지해요.":`최근 ${w.length}문제 중 ${sm}문제 정답 (${acc}%) · 정답률 80% 이상(최소 ${LEVELUP_MIN}문제)이 되면 다음 단계로 올라가요.`;
+ $("lvBar").style.width=Math.min(100,acc)+"%";
+ const due=dueStages(),later=Object.keys(data.weak).map(Number).filter(id=>data.weak[id].due>today());
+ let h="";
+ if(due.length)h+=`🧠 <b>오늘 다시 풀 단계</b>: ${due.map(id=>stageName(id)).join(" / ")}<br>`;
+ if(later.length)h+=`📅 내일 이후 복습 예정: ${later.map(id=>stageName(id)).join(" / ")}<br>`;
+ if(!h)h="✨ 지금은 복습할 단계가 없어요. 어려웠던 단계는 자동으로 다음 날 다시 출제돼요.";
+ $("dueBox").innerHTML=h}
+function renderWorlds(){
+ $("worlds").innerHTML=worlds.map((w,i)=>{const done=data.cleared.filter(x=>Math.floor(x/5)===i).length,open=i*5<=data.level;return `<button class="world ${i===world?"selected":""}" data-world="${i}" ${open?"":"disabled"}><span class="emoji">${w.e}</span><strong>${i+1}. ${w.name}</strong><small class="muted">${w.desc}</small><div class="bar" style="margin-top:8px"><span style="width:${done*20}%"></span></div><small>${done}/5 단계 통과</small></button>`}).join("");
+ document.querySelectorAll("[data-world]").forEach(b=>b.onclick=()=>{world=+b.dataset.world;renderWorlds();renderStages()})}
+function renderStages(){
+ let h=`<div class="muted" style="margin-top:12px"><b>${worlds[world].name}</b>의 단계 · 🧠 표시는 복습 예정 단계예요.</div>`;
+ for(let k=0;k<5;k++){const id=world*5+k,locked=id>data.level,cl=data.cleared.includes(id),st=data.stage[id],pct=st&&st.s?Math.round(st.c/st.s*100)+"%":"-",icon=locked?"🔒":cl?"✅":id===data.level?"▶️":"•";
+  h+=`<button class="world stg" data-stage="${id}" ${locked?"disabled":""}><span>${icon} ${stageName(id)}${data.weak[id]?" 🧠":""}</span><small class="muted">정답률 ${pct}</small></button>`}
+ $("stages").innerHTML=h;
+ $("stages").querySelectorAll("[data-stage]").forEach(b=>b.onclick=()=>start("free",+b.dataset.stage))}
+function renderGear(){$("equipment").innerHTML=gear.map(g=>{let owned=data.items.includes(g.name),equipped=data.equipped[g.slot]===g.name;return `<div class="item ${equipped?"equipped":""}"><div class="icon">${g.e}</div><b>${g.name}</b><div class="muted">${g.slot} · ${g.cost?g.cost+" 코인":"기본 장비"}</div>${owned?`<button class="secondary" data-equip="${g.name}">${equipped?"착용 중":"착용하기"}</button>`:`<button class="primary" data-buy="${g.name}" ${data.coins<g.cost?"disabled":""}>구매 ${g.cost}🪙</button>`}</div>`}).join("");document.querySelectorAll("[data-buy]").forEach(b=>b.onclick=()=>{let g=gear.find(x=>x.name===b.dataset.buy);if(data.coins>=g.cost){data.coins-=g.cost;data.items.push(g.name);data.equipped[g.slot]=g.name;save();update()}});document.querySelectorAll("[data-equip]").forEach(b=>b.onclick=()=>{let g=gear.find(x=>x.name===b.dataset.equip);data.equipped[g.slot]=g.name;save();update()})}
+function renderTreasure(){$("collection").innerHTML=data.items.map(n=>{let g=gear.find(x=>x.name===n);return `<span class="pill">${g?g.e:"🎁"} ${esc(n)}</span>`}).join("")}
+function renderReport(){
+ $("rSolved").textContent=data.solved;$("rCorrect").textContent=data.correct;$("rDays").textContent=data.days.length;$("rReview").textContent=Object.keys(data.weak).length;
+ $("areaReport").innerHTML=areas.map((a,i)=>{let s=0,c=0;for(let k=0;k<5;k++){const x=data.stage[i*5+k];if(x){s+=x.s;c+=x.c}}const pct=s?Math.round(c/s*100):0;return `<div style="margin:10px 0"><div class="row"><b>${a}</b><span class="muted">${c}/${s} 정답 · ${pct}%</span></div><div class="bar" style="margin-top:5px"><span style="width:${pct}%"></span></div></div>`}).join("");
+ $("stageReport").innerHTML=STAGES.map((n,i)=>{const x=data.stage[i];if(!x||!x.s)return"";return `<tr><td>Lv.${i+1} ${n}</td><td>${x.c}/${x.s}</td><td>${Math.round(x.c/x.s*100)}%</td></tr>`}).join("")||'<tr><td colspan="3">아직 기록이 없습니다.</td></tr>';
+ const tg=Object.entries(data.tags).filter(([k,v])=>v.s>=3).sort((a,b)=>(b[1].s-b[1].c)/b[1].s-(a[1].s-a[1].c)/a[1].s||b[1].s-a[1].s).slice(0,5);
+ $("tagReport").innerHTML=tg.map(([k,v])=>`<tr><td>${esc(k)}</td><td>${v.c}/${v.s}</td><td>${Math.round(v.c/v.s*100)}%</td></tr>`).join("")||'<tr><td colspan="3">유형별로 3문제 이상 풀면 분석이 표시돼요.</td></tr>';
+ const wk=Object.keys(data.weak).map(Number).sort((a,b)=>a-b);
+ $("weakReport").innerHTML=wk.length?wk.map(id=>`${esc(stageName(id))} — 복습 예정일 ${esc(data.weak[id].due)}`).join("<br>"):"복습 예정 단계가 없습니다.";
+ $("history").innerHTML=data.history.slice(-12).reverse().map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.area)}</td><td>${x.s}</td><td>${x.c}</td><td>${x.s?Math.round(x.c/x.s*100):0}%</td></tr>`).join("")||'<tr><td colspan="5">아직 학습 기록이 없습니다.</td></tr>'}
+function renderCert(){$("certDate").textContent="발급일: "+today();const complete=data.days.length>=90&&data.cleared.length>=25;$("certStatus").textContent=complete?"90일 학습 여정과 25개 단계를 모두 완수했습니다!":`현재 ${data.days.length}/90일 학습 · ${data.cleared.length}/25개 단계 통과`}
+function update(){setProgress();renderHome();renderWorlds();renderStages();
+ const comp=gear.find(x=>x.name===data.equipped["동료"]);$("heroKnight").textContent=comp?"🧑‍🚀"+comp.e:"🛡️";
+ $("avatarTitle").textContent=data.badges[data.badges.length-1]||"수습 기사";$("avatarPreview").textContent=["⛑️","🦺","🛡️","⚔️","🧣","🦉","🐉"].join(" ");
+ renderGear();renderReport();renderTreasure();renderCert()}
+
+/* ===== 출제: 오늘의 모험 = 어제 어려웠던 단계 복습 + 지난 단계 점검 + 현재 단계 ===== */
+function reviewItemsFor(id,nOld,nNew){const w=data.weak[id],out=[];(w.seeds||[]).slice(0,nOld).forEach(sd=>out.push({...gen(id,sd),src:'review'}));for(let i=0;i<nNew;i++)out.push({...gen(id),src:'review'});return out}
+function buildDaily(){
+ const rev=[];dueStages().slice(0,3).forEach(id=>rev.push(...reviewItemsFor(id,2,2)));
+ const revItems=rev.slice(0,8),lv=data.level,rest=[],nSp=lv>0?2:0;
+ for(let i=0;i<nSp;i++)rest.push({...gen(pick([lv-1,Math.max(0,lv-2),rand(0,lv-1)])),src:'spiral'});
+ const target=Math.min(18,Math.max(SESSION,revItems.length+nSp+6));
+ while(revItems.length+rest.length<target)rest.push({...gen(lv),src:'core'});
+ return [...revItems,...shuffle(rest)]}
+const buildReviewOnly=()=>dueStages().slice(0,3).flatMap(id=>reviewItemsFor(id,3,2)).slice(0,12);
+const buildFree=id=>Array.from({length:10},()=>({...gen(id),src:id===data.level?'core':'free'}));
+
+function start(mode,stage){
+ let items;
+ if(mode==="daily")items=buildDaily();
+ else if(mode==="review"){items=buildReviewOnly();if(!items.length){const n=Object.keys(data.weak).length;alert(n?`오늘 다시 풀 단계는 없어요. 내일 이후 만날 단계가 ${n}개 기다리고 있어요!`:"다시 풀 단계가 아직 없어요. 새 모험을 시작해 보세요!");return}}
+ else{if(stage>data.level)return;items=buildFree(stage)}
+ S={mode,stage,items,i:0,first:0,solved:0,earned:0,coins:0,stats:{},done:false,finalized:false,summary:null};
+ $("play").style.display="block";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+ $("stageLabel").textContent=mode==="daily"?"오늘의 성장 모험":mode==="review"?"어려웠던 단계 다시 풀기":stageName(stage);
+ loadQ();$("play").scrollIntoView({behavior:"smooth",block:"start"})}
+function loadQ(){
+ cur=S.items[S.i];answered=false;attempts=0;
+ $("qLabel").textContent=`${S.i+1} / ${S.items.length}번`;$("qBar").style.width=(S.i/S.items.length*100)+"%";
+ $("questionEmoji").textContent=cur.src==='review'?'🧠':cur.src==='spiral'?'🔁':worlds[Math.floor(cur.stage/5)].e;
+ $("missionTitle").textContent=stageName(cur.stage);
+ $("missionDesc").textContent=cur.src==='review'?'어려웠던 단계를 다시 만났어요. 이번에는 해낼 수 있어요!':cur.src==='spiral'?'지난 단계도 잘 기억하고 있는지 확인해요.':'천천히 풀어도 괜찮아요.';
+ const q=$("question");q.innerHTML=cur.q+(cur.ask?`<div class="ask">${cur.ask}</div>`:"");
+ q.style.fontSize=cur.q.replace(/<[^>]+>/g,"").length>26?"22px":"";
+ $("feedback").className="feedback hide";$("hint").classList.add("hide");$("hintBtn").classList.remove("hide");$("check").classList.remove("hide");$("next").classList.add("hide");$("next").textContent="다음 문제 ➜";
+ const isC=cur.type==="choice";$("answer").classList.toggle("hide",isC);$("choices").classList.toggle("hide",!isC);$("check").classList.toggle("hide",isC);
+ const a=$("answer");a.value="";a.disabled=false;a.inputMode=cur.type==="frac"?"text":"decimal";a.placeholder=cur.type==="frac"?"예: 3/4  또는  1 1/2":"정답을 입력하세요";
+ if(isC){$("choices").innerHTML=cur.choices.map(c=>`<button class="choice" data-v="${esc(c.v)}">${c.h}</button>`).join("");$("choices").querySelectorAll("button").forEach(b=>b.onclick=()=>submit(b.dataset.v))}else a.focus();
+ $("sessionStars").textContent=S.earned;$("sessionScore").textContent=`첫 시도 정답 ${S.first}개 · 풀이 ${S.solved}개`}
+
+/* ===== 채점 ===== */
+const parseNum=s=>{s=String(s).replace(/[,\s]/g,"");return /^-?\d*\.?\d+$/.test(s)?parseFloat(s):null};
+const parseFrac=s=>{s=String(s).trim().replace(/,/g,"");let m;
+ if(m=s.match(/^(\d+)$/)){const n=+m[1];return{n,d:1,fn:n,fd:1}}
+ if(m=s.match(/^(\d+)\s*\/\s*(\d+)$/)){const n=+m[1],d=+m[2];return d?{n,d,fn:n,fd:d}:null}
+ if(m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/)){const w=+m[1],a=+m[2],b=+m[3];return b?{n:w*b+a,d:b,fn:a,fd:b}:null}
+ return null};
+const ansText=p=>p.type==="frac"?ft(p.ans.n,p.ans.d):p.type==="num"?(Number.isInteger(p.ans)?fmt(p.ans):String(+p.ans.toFixed(6))):p.ans;
+function evaluate(input){const p=cur;
+ if(p.type==="choice")return{ok:input===p.ans};
+ if(p.type==="num"){const x=parseNum(input);if(x===null)return{bad:"숫자로 입력해 주세요."};return{ok:Math.abs(x-p.ans)<1e-9}}
+ const f=parseFrac(input);if(!f)return{bad:"분수는 3/4, 대분수는 1 1/2 처럼 입력해 주세요."};
+ if(f.n*p.ans.d!==f.d*p.ans.n)return{ok:false};
+ if(f.fd>1&&gcd(f.fn,f.fd)>1)return{notReduced:true};
+ return{ok:true}}
+function trapMsg(input){for(const t of cur.traps||[]){
+ if(cur.type==="num"&&"v" in t){const x=parseNum(input);if(x!==null&&Math.abs(x-t.v)<1e-9)return t.msg}
+ else if(cur.type==="frac"&&"d" in t){const f=parseFrac(input);if(f&&f.n*t.d===f.d*t.n)return t.msg}}return""}
+function markDay(){if(!data.days.includes(today())){data.days.push(today());if(data.lastDay){const prev=new Date(data.lastDay+"T00:00:00"),now=new Date(today()+"T00:00:00");data.streak=Math.round((now-prev)/86400000)===1?data.streak+1:1}else data.streak=1;data.lastDay=today()}}
+function recordFirst(ok){
+ const p=cur;data.solved++;S.solved++;if(ok){data.correct++;S.first++}
+ const st=data.stage[p.stage]||(data.stage[p.stage]={s:0,c:0});st.s++;if(ok)st.c++;
+ const tg=data.tags[p.tag]||(data.tags[p.tag]={s:0,c:0,stage:p.stage});tg.s++;if(ok)tg.c++;
+ const ss=S.stats[p.stage]||(S.stats[p.stage]={s:0,c:0,wrong:[],rs:0,rc:0});ss.s++;if(ok)ss.c++;else if(!ss.wrong.includes(p.seed))ss.wrong.push(p.seed);
+ if(p.src==="review"){ss.rs++;if(ok)ss.rc++}
+ if(p.stage===data.level&&p.src==="core"){data.win.push(ok?1:0);data.win=data.win.slice(-WINDOW)}
+ markDay()}
+function complete(){
+ answered=true;data.daily.count++;$("answer").disabled=true;$("choices").querySelectorAll("button").forEach(b=>b.disabled=true);
+ $("check").classList.add("hide");$("hintBtn").classList.add("hide");$("next").classList.remove("hide");$("next").textContent=S.i+1>=S.items.length?"결과 보기 🏆":"다음 문제 ➜";
+ $("sessionStars").textContent=S.earned;$("sessionScore").textContent=`첫 시도 정답 ${S.first}개 · 풀이 ${S.solved}개`;
+ save();setProgress();renderHome()}
+function submit(input){
+ if(answered||!S)return;
+ const r=evaluate(input);
+ if(r.bad){$("feedback").className="feedback try";$("feedback").textContent=r.bad;return}
+ if(r.notReduced){$("feedback").className="feedback try";$("feedback").textContent="값은 맞아요! 기약분수가 되도록 약분해서 다시 써 보세요.";return}
+ attempts++;
+ if(r.ok){
+  if(attempts===1){recordFirst(true);S.earned+=2;S.coins+=3;data.stars+=2;data.coins+=3}else{S.earned+=1;S.coins+=1;data.stars+=1;data.coins+=1}
+  $("feedback").className="feedback good";$("feedback").textContent=attempts===1?["🎉 정답! 멋져요, 이상윤 기사!","✨ 훌륭해요! 수학 별을 되찾았어요!","🌟 잘했어요! 한 걸음 더 성장했어요!"][Math.floor(Math.random()*3)]:"👍 다시 도전해서 맞혔어요! 끝까지 해내는 모습이 멋져요.";
+  complete();return}
+ if(attempts===1)recordFirst(false);
+ const max=cur.type==="choice"?1:3;
+ if(attempts>=max){$("feedback").className="feedback try";$("feedback").textContent=`정답은 ${ansText(cur)} 예요. 이 문제는 어려웠던 단계로 기록해 두고, 내일 다시 만나요!`;$("hint").textContent="💡 "+cur.hint;$("hint").classList.remove("hide");complete();return}
+ const tm=trapMsg(input);
+ $("feedback").className="feedback try";$("feedback").textContent=`괜찮아요! ${tm||"힌트를 보고 다시 생각해 보세요."} 다시 도전할 수 있어요.`;
+ if(attempts>=2){$("hint").textContent="💡 "+cur.hint;$("hint").classList.remove("hide")}
+ $("answer").select()}
+
+/* ===== 세션 종료: 단계 상승 판정 + 오답 분석 + 다음 날 복습 예약 ===== */
+function finalizeSession(){
+ if(S.finalized)return S.summary;S.finalized=true;
+ const sum={up:null,badge:null,champ:false,weak:[],mastered:[]};
+ Object.keys(S.stats).forEach(k=>{const id=+k,st=S.stats[k],w=data.weak[id];
+  if(st.rs>0){
+   if(st.rc/st.rs>=0.75){delete data.weak[id];sum.mastered.push(id)}
+   else{data.weak[id]={due:tomorrow(),seeds:st.wrong.length?st.wrong.slice(0,6):((w&&w.seeds)||[]),tries:(w?w.tries||0:0)+1};sum.weak.push(id)}}
+  else if((st.s>=3&&st.c/st.s<0.7)||st.wrong.length>=3||(st.s>=2&&st.c===0)){
+   data.weak[id]={due:tomorrow(),seeds:st.wrong.slice(0,6),tries:0};sum.weak.push(id)}});
+ const w=data.win,sm=w.reduce((a,b)=>a+b,0);
+ if(w.length>=LEVELUP_MIN&&sm/w.length>=LEVELUP_RATE){
+  const lv=data.level,firstTime=!data.cleared.includes(lv);
+  if(firstTime){data.cleared.push(lv);if(lv%5===4){const b=BADGES[Math.floor(lv/5)];if(!data.badges.includes(b)){data.badges.push(b);sum.badge=b}}}
+  if(lv<24){data.level=lv+1;data.win=[];sum.up={from:lv,to:lv+1};world=Math.floor(data.level/5)}else if(firstTime)sum.champ=true}
+ if(S.solved>0){data.history.push({date:today(),area:S.mode==="daily"?"오늘의 모험":S.mode==="review"?"어려웠던 단계 복습":stageName(S.stage),s:S.solved,c:S.first});data.history=data.history.slice(-100)}
+ save();update();S.summary=sum;return sum}
+function finishSession(){
+ const sum=finalizeSession();S.done=true;
+ $("stageLabel").textContent="오늘의 모험 결과";$("questionEmoji").textContent="🏆";
+ $("missionTitle").textContent=S.solved&&S.first/S.solved>=0.8?"훌륭한 모험이었어요!":"끝까지 도전했어요!";
+ $("missionDesc").textContent="오늘의 노력은 사라지지 않아요. 어려웠던 단계는 내일 다시 만나요.";
+ const q=$("question");q.style.fontSize="";q.textContent=`${S.first} / ${S.solved} 정답 (첫 시도)`;
+ let h=`⭐ ${S.earned}개 · 🪙 ${S.coins}개 획득`;
+ if(sum.up)h+=`<br>🎉 <b>${stageName(sum.up.from)}</b> 통과! 다음 단계 <b>${stageName(sum.up.to)}</b> 로 올라갑니다.`;
+ if(sum.badge)h+=`<br>🏅 새 칭호 획득: ${esc(sum.badge)}`;
+ if(sum.champ)h+=`<br>🏆 모든 단계를 통과했어요! 정말 대단해요!`;
+ if(sum.mastered.length)h+=`<br>✅ 다시 풀기 성공: ${sum.mastered.map(stageName).join(", ")}`;
+ if(sum.weak.length)h+=`<br>🧠 내일 다시 만날 단계: ${sum.weak.map(stageName).join(", ")}`;
+ else if(!sum.up)h+=`<br>👍 오늘은 다시 풀 단계가 없어요.`;
+ $("feedback").className="feedback good";$("feedback").innerHTML=h;
+ $("answer").classList.add("hide");$("choices").classList.add("hide");$("check").classList.add("hide");$("hintBtn").classList.add("hide");$("hint").classList.add("hide");
+ $("qBar").style.width="100%";$("next").classList.remove("hide");$("next").textContent="계속 새 문제 풀기"}
+
+/* ===== 이벤트 ===== */
+$("startDaily").onclick=()=>start("daily");$("startReview").onclick=()=>start("review");
+$("check").onclick=()=>{if($("answer").value.trim())submit($("answer").value)};
+$("answer").addEventListener("keydown",e=>{if(e.key!=="Enter")return;if(answered){$("next").click();return}if($("answer").value.trim())submit($("answer").value)});
+$("next").onclick=()=>{if(!S)return;if(S.done){start(S.mode,S.stage);return}S.i++;if(S.i>=S.items.length){finishSession();return}loadQ()};
+$("hintBtn").onclick=()=>{if(!cur)return;$("hint").textContent="💡 "+cur.hint;$("hint").classList.remove("hide")};
+$("backMap").onclick=()=>{if(S&&!S.done&&S.solved>0)finalizeSession();S=null;$("play").style.display="none";tab("adventure")};
+$("openChest").onclick=()=>{if(data.coins<20){$("chestMessage").textContent="코인이 조금 더 필요해요. 문제를 풀어 코인을 모아 보세요!";return}data.coins-=20;data.chests++;let available=gear.filter(g=>!data.items.includes(g.name)&&g.cost>0),g=available.length?available[Math.floor(Math.random()*available.length)]:null;if(g){data.items.push(g.name);$("chestMessage").textContent=`🎉 보물 발견! ${g.e} ${g.name}을(를) 얻었어요!`}else{data.coins+=10;$("chestMessage").textContent="모든 장비를 모았어요! 보너스 코인 10개를 받았어요."}save();update()};
+$("downloadReport").onclick=()=>{let rows=[["날짜","영역","풀이 수","첫 시도 정답 수"],...data.history.map(x=>[x.date,x.area,x.s,x.c])];let csv="\uFEFF"+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(",")).join("\n");download(new Blob([csv],{type:"text/csv;charset=utf-8"}),"isangyoon_learning_report.csv")};
+$("backup").onclick=()=>download(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),"isangyoon_math_backup.json");
+$("restore").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let x=JSON.parse(await f.text());if(!x||typeof x!=="object"||!Array.isArray(x.history))throw Error();data=sanitize(x);if(data.daily.date!==today())data.daily={date:today(),count:0};world=Math.floor(data.level/5);save();update();alert("학습 기록을 불러왔습니다.")}catch(err){alert("올바른 백업 파일이 아닙니다.")}e.target.value=""};
+function download(blob,name){let a=document.createElement("a"),u=URL.createObjectURL(blob);a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+$("printCert").onclick=()=>window.print();
+update();
+})();
+</script></body></html>
